@@ -1,6 +1,9 @@
 package br.com.buscadorDeCep.model;
 
 import br.com.buscadorDeCep.excecao.InvalidFormatException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -9,23 +12,18 @@ import java.net.http.HttpResponse;
 public class ConsultarEndereco {
     private String nameClient;
     private String cepUsuario;
-    TransformarArquivo gson;
-//    {
-//        try {
-//            TransformarArquivo gson = new TransformarArquivo();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
 
     public Endereco consultor(String cepUsuario) {
         this.cepUsuario = cepUsuario;
 
-        if (getCepUsuario().length() >= 9) {
-            throw new InvalidFormatException("Você digitou um CEP maior que 8 digitos!");
-        } else if (getCepUsuario().matches(".*[^0-9].*")) {
+        if (this.cepUsuario.length() != 8) {
+            throw new InvalidFormatException("CEP deve ter 8 digitos");
+        } else if (this.cepUsuario.matches(".*[^0-9].*")) {
             throw new InvalidFormatException("Você digitou um CEP alfanumérico!");
-        }else if (getCepUsuario().contains(" ")){
+        }else if (this.cepUsuario.contains(" ")){
             throw new InvalidFormatException("Você digitou um CEP com espaços vazios!");
         }
 
@@ -41,7 +39,7 @@ public class ConsultarEndereco {
             response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
 
-            return gson.getGson().fromJson(response.body(), Endereco.class);
+            return gson.fromJson(response.body(), Endereco.class);
         } catch (Exception e){
             throw new RuntimeException("Não consegui encontrar nada utilizando esse CEP!");
         }

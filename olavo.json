@@ -1,0 +1,23 @@
+[
+  {
+    "cep": "08210-030",
+    "logradouro": "Rua Colombo",
+    "complemento": "",
+    "localidade": "São Paulo",
+    "uf": "SP"
+  },
+  {
+    "cep": "01001-001",
+    "logradouro": "Praça da Sé",
+    "complemento": "lado par",
+    "localidade": "São Paulo",
+    "uf": "SP"
+  },
+  {
+    "cep": "17860-005",
+    "logradouro": "Rua Doutor Paulo Antonio Ribeiro Fraga",
+    "complemento": "",
+    "localidade": "Pacaembu",
+    "uf": "SP"
+  }
+]

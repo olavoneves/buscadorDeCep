@@ -3,7 +3,7 @@ package br.com.buscadorDeCep.main;
 import br.com.buscadorDeCep.model.ConsultarEndereco;
 import br.com.buscadorDeCep.model.Endereco;
 import br.com.buscadorDeCep.model.ListaDeEnderecos;
-import br.com.buscadorDeCep.model.TransformarArquivo;
+import br.com.buscadorDeCep.model.CriarArquivo;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,18 +12,22 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         ConsultarEndereco consultor = new ConsultarEndereco();
         ListaDeEnderecos lista = new ListaDeEnderecos();
-        TransformarArquivo arquivo = new TransformarArquivo();
+        CriarArquivo arquivoJson = new CriarArquivo();
         String cepUsuario = "";
-        String nameUsuario;
+        String nameUsuario = consultor.getNameClient();
         String confere = "S";
         Endereco endereco;
 
+        try {
+            // Nome do usuario
+            System.out.print("Digite seu nome: ");
+            nameUsuario = scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println("Erro ao solicitar o nome!");
+        }
+
         while (confere.equals("S")) {
             try {
-                // Nome do usuario
-                System.out.print("Digite seu nome: ");
-                nameUsuario = scanner.nextLine();
-
                 // CEP apenas com números
                 System.out.print("Digite seu cep: ");
                 cepUsuario = scanner.nextLine().replaceAll("[\\s.+/-]", "");
@@ -32,13 +36,11 @@ public class Menu {
                 endereco = consultor.consultor(cepUsuario);
 
                 // Adicionar Nome e CEP do usuario na minha propria lista
-                lista.adicionarNaLista();
+                lista.addNaListaFormatada(endereco);
+                lista.addNaListaJson(endereco);
 
                 // Mostrar a lista para o usuario
-                System.out.println(lista);
-
-                // Gerando o arquivo do CEP .json
-                arquivo.salvarJson(endereco);
+                System.out.println(lista.getLista());
 
                 // Imprimir para o usuario se quer continuar e tratar ambas respostas
                 System.out.print("Quer digitar outro CEP? [S/N] ");
@@ -53,6 +55,8 @@ public class Menu {
                 System.out.println("Erro ao interagir com o usuário!");
             }
         }
+        // Gerando o arquivo do JSON
+        arquivoJson.salvarJson(lista, "C:/Users/User/Documents/estudos/Alura/Formação-Java-POO/Java-Primeira-Aplicação/Aulas/src/br/com/buscadorDeCep",nameUsuario);
         scanner.close();
     }
 }

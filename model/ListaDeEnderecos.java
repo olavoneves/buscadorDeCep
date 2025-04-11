@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaDeEnderecos {
-    List<String> lista = new ArrayList<>();
-    Endereco endereco;
-    ConsultarEndereco consultar = new ConsultarEndereco();
+    private List<String> lista = new ArrayList<>();
+    private List<Endereco> enderecos = new ArrayList<>();
 
-    // Adicionar o CEP do usuario na lista de CEPs
-    public void adicionarNaLista() {
-        lista.add(consultar.getNameClient());
-        lista.add(consultar.getCepUsuario());
+    public void addNaListaFormatada(Endereco endereco) {
+        String enderecoFormatado = "CEP: " + endereco.cep() + " | Logradouro: " + endereco.logradouro() + " | Complemento: " + endereco.complemento() + " | Localidade: " + endereco.localidade() + " | UF: " + endereco.uf() + "\n";
+        this.lista.add(enderecoFormatado);
+    }
+
+    public void addNaListaJson(Endereco endereco) {
+        this.enderecos.add(endereco);
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
     public List<String> getLista() {
         return lista;
-    }
-
-    // Sobrescrevendo o toString para a lista aparecer formatada
-    @Override
-    public String toString() {
-        return "Name: " + consultar.getNameClient() + " | CEP: " + endereco.cep() + " | Logradouro: " + endereco.logradouro() + " | Complemento: " + endereco.complemento() + " | Localidade: " + endereco.localidade() + " | UF: " + endereco.uf() + "\n";
     }
 }
