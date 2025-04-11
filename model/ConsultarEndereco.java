@@ -9,13 +9,14 @@ import java.net.http.HttpResponse;
 public class ConsultarEndereco {
     private String nameClient;
     private String cepUsuario;
-    TransformarArquivo gson; {
-        try {
-            TransformarArquivo gson = new TransformarArquivo();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    TransformarArquivo gson;
+//    {
+//        try {
+//            TransformarArquivo gson = new TransformarArquivo();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     public Endereco consultor(String cepUsuario) {
         this.cepUsuario = cepUsuario;
