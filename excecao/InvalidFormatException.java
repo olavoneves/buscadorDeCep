@@ -5,6 +5,7 @@ public class InvalidFormatException extends RuntimeException {
     private String messageCepAlfanumeric;
     private String messageCepSpace;
 
+    // Construtor que recebe uma mensagem de parametro
     public InvalidFormatException(String message) {
         this.messageCepFormat = message;
         this.messageCepAlfanumeric = message;

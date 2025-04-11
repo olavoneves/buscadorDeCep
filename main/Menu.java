@@ -14,7 +14,7 @@ public class Menu {
         ListaDeEnderecos lista = new ListaDeEnderecos();
         CriarArquivo arquivoJson = new CriarArquivo();
         String cepUsuario = "";
-        String nameUsuario = consultor.getNameClient();
+        String nameUsuario = "";
         String confere = "S";
         Endereco endereco;
 

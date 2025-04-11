@@ -10,12 +10,12 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ConsultarEndereco {
-    private String nameClient;
     private String cepUsuario;
     Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
 
+    // Metodo que retorna um Endereço Gson
     public Endereco consultor(String cepUsuario) {
         this.cepUsuario = cepUsuario;
 
@@ -43,10 +43,6 @@ public class ConsultarEndereco {
         } catch (Exception e){
             throw new RuntimeException("Não consegui encontrar nada utilizando esse CEP!");
         }
-    }
-
-    public String getNameClient() {
-        return nameClient;
     }
 
     public String getCepUsuario() {
